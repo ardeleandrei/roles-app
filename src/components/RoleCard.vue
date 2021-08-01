@@ -60,20 +60,23 @@ h2 {
   color: rgb(160, 160, 160);
 }
 p {
-  font-size: 14px;
+  font-size: 12px;
+  color: grey;
 }
 .container {
   display: flex;
   flex-direction: column;
   margin: 12px;
-  width: 320px;
+  max-width: 320px;
   height: 320px;
   border: solid rgb(216, 216, 216) 1px;
   border-radius: 4px;
+  background-color: white;
 }
 .content {
   text-align: left;
   padding: 24px 24px 10px 20px;
+  margin-bottom: auto;
 }
 .status-header {
   height: 24px;
@@ -98,7 +101,8 @@ p {
 .footer {
   display: flex;
   align-items: center;
-  height: 100px;
+  width: 100%;
+  height: 40px;
   background-color: rgb(248, 248, 248);
   border-radius: 0px 0px 4px 4px;
 }
