@@ -19,8 +19,8 @@
       <div v-if="isEditable" class="footer-for-editable">
         <div class="timestamp">Last update: {{dateModified.split('T')[0]}}</div>
         <div class="action-buttons">
-          <button class="footer-button edit">EDIT</button>
-          <button class="footer-button delete"> DELETE</button>
+          <button class="footer-button edit" v-on:click="edit">EDIT</button>
+          <button class="footer-button delete" v-on:click="remove"> DELETE</button>
           
         </div>
       </div>
@@ -35,6 +35,7 @@
 export default {
   name: "RoleCard",
   props: {
+    roleId: Number,
     roleName: String,
     roleType: String,
     roleDescription: String,
@@ -45,6 +46,15 @@ export default {
     dateCreated: String,
     dateModified: String,
   },
+  methods: {
+    edit() {
+      this.$store.commit('setRoleForEdit', this.roleId)
+      this.$router.push({name:'manage', query: {action: 'edit'}})
+    },
+    remove() {
+      this.$store.commit('deleteRole', this.roleId)
+    }
+  }
 };
 </script>
 
@@ -68,6 +78,7 @@ p {
   flex-direction: column;
   margin: 12px;
   max-width: 320px;
+  min-width: 320px;
   height: 320px;
   border: solid rgb(216, 216, 216) 1px;
   border-radius: 4px;
@@ -77,6 +88,7 @@ p {
   text-align: left;
   padding: 24px 24px 10px 20px;
   margin-bottom: auto;
+  min-width: calc( 322px - 48px );
 }
 .status-header {
   height: 24px;
@@ -114,7 +126,11 @@ p {
 .flex {
   display: flex;
 }
-
+.description {
+  width: 100%;
+  max-height: 80px;
+  overflow: auto;
+}
 .footer-for-editable {
   display: flex;
   width: 100%;

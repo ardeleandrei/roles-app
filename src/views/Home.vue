@@ -20,12 +20,13 @@
             </div>
           </div>
 
-          <button class="create-role-button">CREATE NEW ROLE</button>
+          <button class="create-role-button" v-on:click="create">CREATE NEW ROLE</button>
         </div>
         <div class="roles">
           <RoleCard
             v-for="role in filteredRoles"
             :key="role.id"
+            :roleId="role.id"
             :roleName="role.name"
             :roleType="role.type"
             :roleDescription="role.description"
@@ -86,9 +87,9 @@ export default {
     },
   }),
   methods: {
-    navigate: function() {
-      this.$router.push("about");
-    },
+    create: function() {
+      this.$router.push({name: 'manage', query: {action: 'create'}});
+    }
   },
 };
 </script>
