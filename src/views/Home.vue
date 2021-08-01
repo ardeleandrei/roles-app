@@ -6,22 +6,20 @@
         <div class="header">
           <div class="inputs">
             <input
-            class="search-input"
-            v-model="searchQuery"
-            placeholder="Search"
-          />
-          <div class="dropdown">
-            <label for="cars">Role status</label>
-            <select name="cars" id="cars">
-              <option value="volvo">Volvo</option>
-              <option value="saab">Saab</option>
-              <option value="opel">Opel</option>
-              <option value="audi">Audi</option>
-            </select>
-          </div>
+              class="search-input"
+              v-model="searchQuery"
+              placeholder="Search"
+            />
+            <div class="dropdown">
+              <label for="status">Role status</label>
+              <select v-model="statusFilter" name="status" id="status">
+                <option value="ANY">Active and Inactive</option>
+                <option value="ACTIVE">Active</option>
+                <option value="INACTIVE">Inactive</option>
+              </select>
             </div>
-          
-          
+          </div>
+
           <button class="create-role-button">CREATE NEW ROLE</button>
         </div>
         <div class="roles">
@@ -63,11 +61,23 @@ export default {
   computed: mapState({
     filteredRoles(state) {
       if (this.statusFilter === "ACTIVE") {
-        return state.roles.filter((role) => role.active);
+        return state.roles.filter((role) =>
+          role.active && this.searchQuery !== ""
+            ? role.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+            : role.active
+        );
       } else if (this.statusFilter === "INACTIVE") {
-        return state.roles.filter((role) => !role.active);
+        return state.roles.filter((role) =>
+          !role.active && this.searchQuery !== ""
+            ? role.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+            : !role.active
+        );
       } else {
-        return state.roles;
+        return state.roles.filter((role) =>
+          this.searchQuery !== ""
+            ? role.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+            : true
+        );
       }
     },
 
@@ -173,8 +183,12 @@ export default {
 }
 
 select {
-  border:0px;
-  outline:0px;
+  border: 0px;
+  outline: 0px;
   height: 19px;
+}
+
+select:hover {
+  cursor: pointer;
 }
 </style>
