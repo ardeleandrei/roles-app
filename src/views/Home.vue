@@ -2,7 +2,6 @@
   <div class="wrapper">
     <div class="backdrop">
       <div class="container">
-        <div class="title">User Roles Management</div>
         <div class="header">
           <div class="inputs">
             <input
@@ -161,6 +160,11 @@ export default {
 
 .search-input:focus {
   outline: none;
+}
+input {
+  background: url("https://img.icons8.com/material-outlined/24/919191/search--v1.png") right no-repeat;
+  background-size: 16px;
+  background-position-y: bottom;
 }
 .inputs {
   display: flex;

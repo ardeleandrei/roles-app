@@ -16,16 +16,16 @@
     </div>
   </div>
   <div class="footer">
-      <div v-if="isEditable" class="footer-for-editable">
+      <div v-if="isEditable" class="footer-editable">
         <div class="timestamp">Last update: {{dateModified.split('T')[0]}}</div>
         <div class="action-buttons">
           <button class="footer-button edit" v-on:click="edit">EDIT</button>
           <button class="footer-button delete" v-on:click="remove"> DELETE</button>
-          
         </div>
       </div>
-      <div v-if="!isEditable">
+      <div v-if="!isEditable" class="footer-not-editable">
         <div class="timestamp">Date created: {{dateCreated.split('T')[0]}}</div>
+        <img src="https://img.icons8.com/material-rounded/24/000000/lock--v1.png" class="lock-icon">
       </div>
     </div>
   </div>
@@ -131,8 +131,16 @@ p {
   max-height: 80px;
   overflow: auto;
 }
-.footer-for-editable {
+.footer-editable {
   display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer-not-editable {
+  display: flex;
+  flex-direction: row;
   width: 100%;
   align-items: center;
   justify-content: space-between;
@@ -155,6 +163,12 @@ p {
 
 .footer-button.delete {
   color: red;
+}
+
+.lock-icon {
+  margin-right: 20px;
+  width: 20px;
+  filter: opacity(0.3);
 }
 
 </style>
